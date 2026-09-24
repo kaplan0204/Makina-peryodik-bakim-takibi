@@ -11,7 +11,8 @@ public class Program
 
         builder.Services.AddControllersWithViews();
         builder.Services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseInMemoryDatabase("MakinaBakimTakipDb"));
+            options.UseSqlServer(
+                builder.Configuration.GetConnectionString("DefaultConnection")));
 
         var app = builder.Build();
 
