@@ -1,0 +1,18 @@
+body {
+    background: #f5f7fb;
+}
+
+.card {
+    border: none;
+    box-shadow: 0 0.25rem 0.75rem rgba(0,0,0,0.05);
+    border-radius: 0.75rem;
+}
+
+.table th,
+.table td {
+    vertical-align: middle;
+}
+
+.navbar {
+    box-shadow: 0 0.125rem 0.5rem rgba(0,0,0,0.1);
+}

@@ -1,0 +1,42 @@
+@model MakinaPeryodikBakimTakibi.Models.MachineOperation
+@{
+    ViewData["Title"] = "Makina İşlemi Ekle";
+}
+
+<h2>Makina İşlemi Ekle</h2>
+
+<form asp-action="Create" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row g-3">
+        <div class="col-md-6">
+            <label asp-for="Code" class="form-label">İşlem Kodu</label>
+            <input asp-for="Code" class="form-control" />
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Name" class="form-label">İşlem Adı</label>
+            <input asp-for="Name" class="form-control" />
+        </div>
+        <div class="col-md-6">
+            <label asp-for="EstimatedMinutes" class="form-label">Tahmini Süre (dk)</label>
+            <input asp-for="EstimatedMinutes" type="number" class="form-control" />
+        </div>
+        <div class="col-md-6">
+            <label asp-for="DefaultPeriodDays" class="form-label">Varsayılan Periyot (gün)</label>
+            <input asp-for="DefaultPeriodDays" type="number" class="form-control" />
+        </div>
+        <div class="col-md-12">
+            <label asp-for="Description" class="form-label">Açıklama</label>
+            <textarea asp-for="Description" class="form-control"></textarea>
+        </div>
+    </div>
+    <div class="form-check my-3">
+        <input asp-for="IsPeriodic" class="form-check-input" />
+        <label asp-for="IsPeriodic" class="form-check-label">Periyodik Bakım mı?</label>
+    </div>
+    <div class="form-check my-3">
+        <input asp-for="IsActive" class="form-check-input" />
+        <label asp-for="IsActive" class="form-check-label">Aktif</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Kaydet</button>
+    <a asp-action="Index" class="btn btn-secondary">İptal</a>
+</form>

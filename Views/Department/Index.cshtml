@@ -1,0 +1,31 @@
+@model IEnumerable<MakinaPeryodikBakimTakibi.Models.Department>
+@{
+    ViewData["Title"] = "Bölümler";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Bölümler</h2>
+    <a asp-action="Create" class="btn btn-primary">Yeni Bölüm</a>
+</div>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Kod</th>
+            <th>Ad</th>
+            <th>Sorumlu</th>
+            <th>Durum</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Code</td>
+                <td>@item.Name</td>
+                <td>@item.ResponsiblePerson</td>
+                <td>@(item.IsActive ? "Aktif" : "Pasif")</td>
+            </tr>
+        }
+    </tbody>
+</table>

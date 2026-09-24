@@ -1,0 +1,103 @@
+@model MakinaPeryodikBakimTakibi.ViewModels.DashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="row g-3 mb-4">
+    <div class="col-md-3">
+        <div class="card bg-primary text-white h-100">
+            <div class="card-body">
+                <div class="small">Toplam Makina</div>
+                <h2>@Model.TotalMachines</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card bg-success text-white h-100">
+            <div class="card-body">
+                <div class="small">Aktif Makina</div>
+                <h2>@Model.ActiveMachines</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card bg-secondary text-white h-100">
+            <div class="card-body">
+                <div class="small">Toplam Personel</div>
+                <h2>@Model.TotalEmployees</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card bg-warning text-dark h-100">
+            <div class="card-body">
+                <div class="small">Açık Bakım</div>
+                <h2>@Model.OpenMaintenances</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-3 mb-4">
+    <div class="col-md-6">
+        <div class="card h-100">
+            <div class="card-header"><strong>Yaklaşan Bakımlar</strong></div>
+            <div class="card-body p-0">
+                <table class="table mb-0">
+                    <thead>
+                        <tr><th>Makina</th><th>Bölüm</th><th>Bakım</th><th>Tarih</th></tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.UpcomingList)
+                        {
+                            <tr>
+                                <td>@item.Machine.Name</td>
+                                <td>@item.Machine.Department.Name</td>
+                                <td>@item.Name</td>
+                                <td>@item.NextMaintenanceDate.ToString("dd.MM.yyyy")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card h-100">
+            <div class="card-header"><strong>Son Bakım Fişleri</strong></div>
+            <div class="card-body p-0">
+                <table class="table mb-0">
+                    <thead>
+                        <tr><th>Fiş No</th><th>Makina</th><th>Personel</th><th>Durum</th></tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.RecentRecords)
+                        {
+                            <tr>
+                                <td>@item.Number</td>
+                                <td>@item.Machine.Name</td>
+                                <td>@(item.ResponsibleEmployee != null ? item.ResponsibleEmployee.FirstName + " " + item.ResponsibleEmployee.LastName : "-" )</td>
+                                <td>@item.Status</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-3">
+    @foreach (var department in Model.Departments)
+    {
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-header"><strong>@department.Name</strong></div>
+                <div class="card-body">
+                    <div class="fw-bold">Makina Sayısı: @department.Machines.Count</div>
+                    <div class="small text-muted">Sorumlu: @department.ResponsiblePerson</div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

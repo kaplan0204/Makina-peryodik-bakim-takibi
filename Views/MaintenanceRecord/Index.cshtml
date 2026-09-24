@@ -1,0 +1,31 @@
+@model IEnumerable<MakinaPeryodikBakimTakibi.Models.MaintenanceRecord>
+@{
+    ViewData["Title"] = "Bakım Fişleri";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Bakım Fişleri</h2>
+    <a asp-action="Create" class="btn btn-primary">Yeni Bakım Fişi</a>
+</div>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Fiş No</th>
+            <th>Makina</th>
+            <th>Bakım Tarihi</th>
+            <th>Durum</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Number</td>
+                <td>@item.Machine?.Name</td>
+                <td>@item.MaintenanceDate.ToString("dd.MM.yyyy")</td>
+                <td>@item.Status</td>
+            </tr>
+        }
+    </tbody>
+</table>

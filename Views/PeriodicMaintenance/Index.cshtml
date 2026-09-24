@@ -1,0 +1,28 @@
+@model IEnumerable<MakinaPeryodikBakimTakibi.Models.PeriodicMaintenance>
+@{
+    ViewData["Title"] = "Periyodik Bakımlar";
+}
+
+<h2>Periyodik Bakımlar</h2>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Makina</th>
+            <th>Bakım</th>
+            <th>Son Bakım</th>
+            <th>Sonraki Bakım</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Machine?.Name</td>
+                <td>@item.Name</td>
+                <td>@item.LastMaintenanceDate.ToString("dd.MM.yyyy")</td>
+                <td>@item.NextMaintenanceDate.ToString("dd.MM.yyyy")</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,64 @@
+@model MakinaPeryodikBakimTakibi.Models.MaintenanceRecord
+@{
+    ViewData["Title"] = "Bakım Fişi Ekle";
+    var machines = ViewBag.Machines as List<MakinaPeryodikBakimTakibi.Models.Machine> ?? new();
+    var employees = ViewBag.Employees as List<MakinaPeryodikBakimTakibi.Models.Employee> ?? new();
+}
+
+<h2>Bakım Fişi Ekle</h2>
+
+<form asp-action="Create" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row g-3">
+        <div class="col-md-6">
+            <label asp-for="Number" class="form-label">Fiş No</label>
+            <input asp-for="Number" class="form-control" />
+        </div>
+        <div class="col-md-6">
+            <label asp-for="MaintenanceDate" class="form-label">Bakım Tarihi</label>
+            <input asp-for="MaintenanceDate" class="form-control" type="date" />
+        </div>
+        <div class="col-md-6">
+            <label asp-for="MachineId" class="form-label">Makina</label>
+            <select asp-for="MachineId" class="form-select">
+                <option value="0">Seçiniz</option>
+                @foreach (var machine in machines)
+                {
+                    <option value="@machine.Id">@machine.Name</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="ResponsibleEmployeeId" class="form-label">Sorumlu Personel</label>
+            <select asp-for="ResponsibleEmployeeId" class="form-select">
+                <option value="">Seçiniz</option>
+                @foreach (var employee in employees)
+                {
+                    <option value="@employee.Id">@employee.FirstName @employee.LastName</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Type" class="form-label">Bakım Tipi</label>
+            <input asp-for="Type" class="form-control" />
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Priority" class="form-label">Öncelik</label>
+            <input asp-for="Priority" class="form-control" />
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Status" class="form-label">Durum</label>
+            <input asp-for="Status" class="form-control" />
+        </div>
+        <div class="col-md-6">
+            <label asp-for="NextMaintenanceDate" class="form-label">Bir Sonraki Bakım</label>
+            <input asp-for="NextMaintenanceDate" class="form-control" type="date" />
+        </div>
+        <div class="col-md-12">
+            <label asp-for="Description" class="form-label">Açıklama</label>
+            <textarea asp-for="Description" class="form-control"></textarea>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Kaydet</button>
+    <a asp-action="Index" class="btn btn-secondary mt-3">İptal</a>
+</form>

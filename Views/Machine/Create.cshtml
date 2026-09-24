@@ -1,0 +1,53 @@
+@model MakinaPeryodikBakimTakibi.Models.Machine
+@{
+    ViewData["Title"] = "Makina Ekle";
+    var departments = ViewBag.Departments as List<MakinaPeryodikBakimTakibi.Models.Department> ?? new();
+}
+
+<h2>Makina Ekle</h2>
+
+<form asp-action="Create" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row g-3">
+        <div class="col-md-6">
+            <label asp-for="Code" class="form-label">Makina Kodu</label>
+            <input asp-for="Code" class="form-control" />
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Name" class="form-label">Makina Adı</label>
+            <input asp-for="Name" class="form-control" />
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Brand" class="form-label">Marka</label>
+            <input asp-for="Brand" class="form-control" />
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Model" class="form-label">Model</label>
+            <input asp-for="Model" class="form-control" />
+        </div>
+        <div class="col-md-6">
+            <label asp-for="SerialNumber" class="form-label">Seri No</label>
+            <input asp-for="SerialNumber" class="form-control" />
+        </div>
+        <div class="col-md-6">
+            <label asp-for="DepartmentId" class="form-label">Bölüm</label>
+            <select asp-for="DepartmentId" class="form-select">
+                <option value="0">Seçiniz</option>
+                @foreach (var department in departments)
+                {
+                    <option value="@department.Id">@department.Name</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-12">
+            <label asp-for="Description" class="form-label">Açıklama</label>
+            <textarea asp-for="Description" class="form-control"></textarea>
+        </div>
+    </div>
+    <div class="form-check my-3">
+        <input asp-for="IsActive" class="form-check-input" />
+        <label asp-for="IsActive" class="form-check-label">Aktif</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Kaydet</button>
+    <a asp-action="Index" class="btn btn-secondary">İptal</a>
+</form>
